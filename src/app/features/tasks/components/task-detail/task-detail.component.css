@@ -1,0 +1,24 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.meta {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin: 16px 0;
+    flex-wrap: wrap;
+}
+
+.description-card {
+    margin: 16px 0;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin: 16px 0;
+}

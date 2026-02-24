@@ -1,0 +1,43 @@
+services:
+  # --- DATABASE ---
+  db:
+    image: postgres:15-alpine
+    container_name: taskmanager-db
+    environment:
+      POSTGRES_DB: taskmanager
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  # --- BACKEND (Nginx refers to this as http://backend:8000) ---
+  backend:
+    build: ./backend
+    container_name: taskmanager-backend
+    volumes:
+      - ./backend:/app
+    environment:
+      DATABASE_URL: postgres://user:password@db:5432/taskmanager
+    depends_on:
+      - db
+
+
+  # --- FRONTEND ---
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev 
+    container_name: taskmanager-frontend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "4200:4200" # For Angular Dev Server
+      - "80:80"     # For Nginx
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:

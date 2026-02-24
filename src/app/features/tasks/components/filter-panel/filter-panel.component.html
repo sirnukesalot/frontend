@@ -1,0 +1,34 @@
+<div class="filter-panel">
+    <mat-form-field appearance="outline">
+        <mat-label>Status</mat-label>
+        <mat-select [(ngModel)]="filters.status" (ngModelChange)="emitFilters()">
+            <mat-option [value]="undefined">All</mat-option>
+            <mat-option value="created">Created</mat-option>
+            <mat-option value="in_progress">In Progress</mat-option>
+            <mat-option value="waiting">Waiting</mat-option>
+            <mat-option value="done">Done</mat-option>
+            <mat-option value="archived">Archived</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Priority</mat-label>
+        <mat-select [(ngModel)]="filters.priority" (ngModelChange)="emitFilters()">
+            <mat-option [value]="undefined">All</mat-option>
+            <mat-option value="low">Low</mat-option>
+            <mat-option value="medium">Medium</mat-option>
+            <mat-option value="high">High</mat-option>
+            <mat-option value="critical">Critical</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Client</mat-label>
+        <mat-select [(ngModel)]="filters.client" (ngModelChange)="emitFilters()">
+            <mat-option [value]="undefined">All</mat-option>
+            <mat-option *ngFor="let c of clients" [value]="c.id">{{ c.name }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <button mat-button (click)="clearFilters()">Clear Filters</button>
+</div>

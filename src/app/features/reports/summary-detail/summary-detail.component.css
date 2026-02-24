@@ -1,0 +1,134 @@
+.header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.detail-card {
+    margin-bottom: 24px;
+}
+
+.summary-text {
+    white-space: pre-line;
+    line-height: 1.6;
+    font-size: 15px;
+    margin: 16px 0;
+}
+
+.metadata {
+    margin-top: 16px;
+}
+
+.meta-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.meta-info {
+    margin-left: 12px;
+    color: #666;
+}
+
+.error-msg {
+    margin-top: 12px;
+    padding: 8px 12px;
+    background: #ffebee;
+    border-radius: 4px;
+    color: #c62828;
+}
+
+.type-chip {
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: capitalize;
+    margin-right: 8px;
+}
+
+.type-chip.daily {
+    background: #e3f2fd;
+    color: #1565c0;
+}
+
+.type-chip.weekly {
+    background: #f3e5f5;
+    color: #7b1fa2;
+}
+
+.type-chip.on_demand {
+    background: #e8eaf6;
+    color: #283593;
+}
+
+.status-badge {
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: capitalize;
+    margin-right: 8px;
+}
+
+.status-badge.completed {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.status-badge.pending {
+    background: #fff3e0;
+    color: #e65100;
+}
+
+.status-badge.generating {
+    background: #e3f2fd;
+    color: #1565c0;
+}
+
+.status-badge.failed {
+    background: #ffebee;
+    color: #c62828;
+}
+
+.method-badge {
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin-right: 8px;
+}
+
+.method-badge.ai {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.method-badge.fallback {
+    background: #fff3e0;
+    color: #e65100;
+}
+
+.versions-card {
+    margin-top: 16px;
+}
+
+.version-item {
+    cursor: pointer;
+}
+
+.version-item:hover {
+    background: rgba(0, 0, 0, 0.04);
+}
+
+.active-version {
+    background: rgba(25, 118, 210, 0.08);
+}
+
+.version-preview {
+    color: #666;
+    font-size: 13px;
+}

@@ -1,0 +1,102 @@
+<div *ngIf="org">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>{{ org.name }}</mat-card-title>
+            <mat-card-subtitle>{{ org.slug }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="stats-grid">
+                <div class="stat">
+                    <span class="stat-label">Status</span>
+                    <mat-chip [highlighted]="org.is_active" [color]="org.is_active ? 'primary' : 'warn'">
+                        {{ org.is_active ? 'Active' : 'Inactive' }}
+                    </mat-chip>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Total Users</span>
+                    <span class="stat-value">{{ org.user_count }}</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Managers</span>
+                    <span class="stat-value">{{ org.manager_count }}</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Engineers</span>
+                    <span class="stat-value">{{ org.engineer_count }}</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Client Users</span>
+                    <span class="stat-value">{{ org.client_user_count }}</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Tasks</span>
+                    <span class="stat-value">{{ org.task_count }}</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Clients</span>
+                    <span class="stat-value">{{ org.client_count }}</span>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button mat-raised-button [color]="org.is_active ? 'warn' : 'primary'" (click)="toggleActive()">
+                    <mat-icon>{{ org.is_active ? 'block' : 'check_circle' }}</mat-icon>
+                    {{ org.is_active ? 'Deactivate' : 'Reactivate' }}
+                </button>
+            </div>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-divider style="margin: 24px 0;"></mat-divider>
+
+    <h3>Managers</h3>
+
+    <table mat-table [dataSource]="managers" class="full-width" *ngIf="managers.length > 0">
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef>Email</th>
+            <td mat-cell *matCellDef="let m">{{ m.email }}</td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <td mat-cell *matCellDef="let m">{{ m.first_name }} {{ m.last_name }}</td>
+        </ng-container>
+        <ng-container matColumnDef="is_active">
+            <th mat-header-cell *matHeaderCellDef>Active</th>
+            <td mat-cell *matCellDef="let m">{{ m.is_active ? 'Yes' : 'No' }}</td>
+        </ng-container>
+        <ng-container matColumnDef="date_joined">
+            <th mat-header-cell *matHeaderCellDef>Joined</th>
+            <td mat-cell *matCellDef="let m">{{ m.date_joined | date:'mediumDate' }}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="managerColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: managerColumns;"></tr>
+    </table>
+
+    <p *ngIf="managers.length === 0">No managers yet.</p>
+
+    <mat-divider style="margin: 24px 0;"></mat-divider>
+
+    <h3>Add Manager</h3>
+    <form [formGroup]="managerForm" (ngSubmit)="createManager()" class="manager-form">
+        <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" type="email" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>First Name</mat-label>
+            <input matInput formControlName="first_name" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="last_name" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput formControlName="password" type="password" />
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit" [disabled]="managerForm.invalid || creating">
+            Add Manager
+        </button>
+    </form>
+    <div *ngIf="managerError" class="error-message">{{ managerError }}</div>
+</div>

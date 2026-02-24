@@ -1,0 +1,25 @@
+.header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    margin-bottom: 16px; 
+}
+
+.full-width { 
+    width: 100%; 
+}
+
+.create-form { 
+    margin-bottom: 24px; 
+}
+
+.form-row { 
+    display: flex; 
+    gap: 12px; 
+    flex-wrap: wrap; 
+}
+
+.form-row mat-form-field { 
+    flex: 1; 
+    min-width: 200px; 
+}

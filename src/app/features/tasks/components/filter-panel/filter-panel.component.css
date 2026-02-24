@@ -1,0 +1,11 @@
+.filter-panel {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+mat-form-field {
+    min-width: 150px;
+}

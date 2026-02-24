@@ -1,0 +1,19 @@
+.full-width {
+    width: 100%;
+}
+
+.row {
+    display: flex;
+    gap: 16px;
+}
+
+.row mat-form-field {
+    flex: 1;
+}
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 16px;
+}

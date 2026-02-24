@@ -1,0 +1,14 @@
+<h2>Calendar View</h2>
+    <div class="calendar-controls">
+      <button mat-icon-button (click)="prevMonth()"><mat-icon>chevron_left</mat-icon></button>
+      <h3>{{ currentMonth | date:'MMMM yyyy' }}</h3>
+      <button mat-icon-button (click)="nextMonth()"><mat-icon>chevron_right</mat-icon></button>
+    </div>
+<div class="calendar-grid">
+      <div *ngFor="let day of calendarDays" class="calendar-day" [class.other-month]="!day.isCurrentMonth" [class.today]="day.isToday">
+        <div class="day-number">{{ day.date | date:'d' }}</div>
+        <div *ngFor="let task of day.tasks" class="task-chip" [class]="'priority-' + task.priority">
+          <a [routerLink]="['/tasks', task.id]">{{ task.title | slice:0:20 }}</a>
+        </div>
+      </div>
+</div>

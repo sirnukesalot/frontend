@@ -1,0 +1,81 @@
+<div class="header-row">
+    <h2>Summary Detail</h2>
+    <a mat-button routerLink="/reports/summaries"><mat-icon>arrow_back</mat-icon> Back to History</a>
+</div>
+
+<div *ngIf="loading" style="text-align: center; padding: 48px;">
+    <mat-spinner diameter="40"></mat-spinner>
+</div>
+
+<div *ngIf="summary && !loading">
+    <mat-card class="detail-card">
+        <mat-card-header>
+            <mat-card-title>
+                <span class="type-chip" [ngClass]="summary.period_type">{{ summary.period_type }}</span>
+                {{ summary.period_start }} — {{ summary.period_end }}
+            </mat-card-title>
+            <mat-card-subtitle>
+                <span class="status-badge" [ngClass]="summary.status">{{ summary.status }}</span>
+                <span *ngIf="summary.generation_method" class="method-badge" [ngClass]="summary.generation_method">
+                    {{ summary.generation_method === 'ai' ? 'AI' : 'Fallback' }}
+                </span>
+                <span class="meta-info">Generated: {{ summary.generated_at | date:'medium' }}</span>
+            </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <p class="summary-text">{{ summary.summary_text }}</p>
+
+            <mat-divider></mat-divider>
+
+            <div class="metadata">
+                <h4>Generation Details</h4>
+                <div class="meta-grid">
+                    <div *ngIf="summary.llm_model"><strong>Model:</strong> {{ summary.llm_model }}</div>
+                    <div *ngIf="summary.prompt_tokens != null"><strong>Prompt tokens:</strong> {{ summary.prompt_tokens
+                        }}</div>
+                    <div *ngIf="summary.completion_tokens != null"><strong>Completion tokens:</strong> {{
+                        summary.completion_tokens }}</div>
+                    <div *ngIf="summary.generation_time_ms != null"><strong>Generation time:</strong> {{
+                        summary.generation_time_ms }}ms</div>
+                    <div *ngIf="summary.requested_by"><strong>Requested by:</strong> {{ summary.requested_by.first_name
+                        }} {{ summary.requested_by.last_name }}</div>
+                    <div><strong>Versions:</strong> {{ summary.version_count }}</div>
+                </div>
+                <div *ngIf="summary.error_message" class="error-msg">
+                    <strong>Error:</strong> {{ summary.error_message }}
+                </div>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button color="primary" (click)="regenerate()" [disabled]="regenerating">
+                <mat-icon>refresh</mat-icon>
+                {{ regenerating ? 'Regenerating...' : 'Regenerate' }}
+            </button>
+        </mat-card-actions>
+    </mat-card>
+
+    <!-- Version History -->
+    <mat-card *ngIf="versions.length > 1" class="versions-card">
+        <mat-card-header>
+            <mat-card-title>Version History ({{ versions.length }})</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-list>
+                <mat-list-item *ngFor="let v of versions" (click)="switchVersion(v)" class="version-item"
+                    [class.active-version]="v.id === summary.id">
+                    <div matListItemTitle>
+                        <span class="method-badge" [ngClass]="v.generation_method">
+                            {{ v.generation_method === 'ai' ? 'AI' : 'Fallback' }}
+                        </span>
+                        {{ v.generated_at | date:'medium' }}
+                        <span *ngIf="v.requested_by"> by {{ v.requested_by.first_name }} {{ v.requested_by.last_name
+                            }}</span>
+                    </div>
+                    <div matListItemLine class="version-preview">
+                        {{ v.summary_text | slice:0:120 }}{{ v.summary_text.length > 120 ? '...' : '' }}
+                    </div>
+                </mat-list-item>
+            </mat-list>
+        </mat-card-content>
+    </mat-card>
+</div>

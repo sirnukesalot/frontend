@@ -1,0 +1,19 @@
+.task-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+table {
+    margin-bottom: 16px;
+}
+
+a {
+    text-decoration: none;
+    color: #1976d2;
+}
