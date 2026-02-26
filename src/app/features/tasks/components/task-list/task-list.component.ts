@@ -33,7 +33,8 @@ export class TaskListComponent implements OnInit, OnDestroy {
   currentPage = 1;
   pageSize = 20;
   isManager = false;
-  displayedColumns = ['space', 'title', 'status', 'priority', 'assignees', 'client', 'deadline'];
+  canCreate = false;
+  displayedColumns = ['space', 'title', 'status', 'priority', 'assignees', 'client', 'tags', 'deadline'];
   private searchTerm = '';
   private activeFilters: FilterState = {};
   private destroy$ = new Subject<void>();
@@ -43,10 +44,11 @@ export class TaskListComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private snackBar: MatSnackBar,
     private cdr: ChangeDetectorRef,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.isManager = this.authService.hasRole('manager');
+    this.canCreate = this.authService.hasAnyRole('manager', 'engineer');
     this.loadTasks();
   }
 
@@ -102,6 +104,15 @@ export class TaskListComponent implements OnInit, OnDestroy {
     this.currentPage = 1;
     this.loadTasks();
   }
+
+  isLightColor(hex: string): boolean {
+    const c = hex.replace('#', '');
+    const r = parseInt(c.substring(0, 2), 16);
+    const g = parseInt(c.substring(2, 4), 16);
+    const b = parseInt(c.substring(4, 6), 16);
+    return (r * 299 + g * 587 + b * 114) / 1000 > 150;
+  }
+
 
   onPageChange(event: PageEvent): void {
     this.currentPage = event.pageIndex + 1;

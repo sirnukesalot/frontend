@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { Subject, takeUntil } from 'rxjs';
 import { ClientService, Client } from '../../../../core/services/client.service';
+import { TagService, Tag } from '../../../../core/services/tag.service';
 
 export interface FilterState {
   status?: string;
@@ -40,10 +41,13 @@ export class FilterPanelComponent implements OnInit, OnDestroy {
   deadlineFrom: Date | null = null;
   deadlineTo: Date | null = null;
   clients: Client[] = [];
+  tags: Tag[] = [];
+  selectedTagSlugs: string[] = [];
   private destroy$ = new Subject<void>();
 
   constructor(
     private clientService: ClientService,
+    private tagService: TagService,
     private cdr: ChangeDetectorRef,
   ) { }
 
@@ -54,6 +58,10 @@ export class FilterPanelComponent implements OnInit, OnDestroy {
         this.cdr.markForCheck();
       });
     }
+    this.tagService.list().pipe(takeUntil(this.destroy$)).subscribe((res) => {
+      this.tags = res.results;
+      this.cdr.markForCheck();
+    });
   }
 
   onDeadlineChange(): void {
@@ -70,6 +78,16 @@ export class FilterPanelComponent implements OnInit, OnDestroy {
     this.emitFilters();
   }
 
+  onTagsChange(): void {
+    if (this.selectedTagSlugs.length) {
+      this.filters.tags = this.selectedTagSlugs.join(',');
+    } else {
+      delete this.filters.tags;
+    }
+    this.emitFilters();
+  }
+
+
   emitFilters(): void {
     const clean: any = {};
     Object.entries(this.filters).forEach(([k, v]) => {
@@ -82,6 +100,7 @@ export class FilterPanelComponent implements OnInit, OnDestroy {
     this.filters = {};
     this.deadlineFrom = null;
     this.deadlineTo = null;
+    this.selectedTagSlugs = [];
     this.filtersChange.emit({});
   }
 

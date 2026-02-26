@@ -28,7 +28,7 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private router: Router,
-  ) {}
+  ) { }
 
   login(email: string, password: string): Observable<TokenResponse> {
     return this.http.post<TokenResponse>(
@@ -105,6 +105,12 @@ export class AuthService {
     const user = this.getCurrentUser();
     return user?.role === role;
   }
+
+  hasAnyRole(...roles: string[]): boolean {
+    const user = this.getCurrentUser();
+    return user ? roles.includes(user.role) : false;
+  }
+
 
   isSuperadmin(): boolean {
     return this.hasRole('superadmin');

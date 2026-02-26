@@ -44,5 +44,12 @@
         </mat-select>
     </mat-form-field>
 
+    <mat-form-field appearance="outline">
+        <mat-label>Tags</mat-label>
+        <mat-select [(ngModel)]="selectedTagSlugs" (ngModelChange)="onTagsChange()" multiple>
+            <mat-option *ngFor="let t of tags" [value]="t.slug">{{ t.name }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
     <button mat-button (click)="clearFilters()">Clear Filters</button>
 </div>

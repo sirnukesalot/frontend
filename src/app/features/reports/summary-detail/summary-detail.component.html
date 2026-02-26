@@ -46,7 +46,7 @@
                 </div>
             </div>
         </mat-card-content>
-        <mat-card-actions>
+        <mat-card-actions *ngIf="isManager">
             <button mat-raised-button color="primary" (click)="regenerate()" [disabled]="regenerating">
                 <mat-icon>refresh</mat-icon>
                 {{ regenerating ? 'Regenerating...' : 'Regenerate' }}

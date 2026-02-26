@@ -31,6 +31,8 @@ import { STATUS_LABELS, VALID_TRANSITIONS } from '../../../../core/constants/tas
 export class TaskDetailComponent implements OnInit, OnDestroy {
   task: TaskDetail | null = null;
   isManager = false;
+  canEdit = false;
+  canViewHistory = false;
   attachments: any[] = [];
   history: any[] = [];
   historyLoaded = false;
@@ -52,9 +54,15 @@ export class TaskDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.isManager = this.authService.hasRole('manager');
+    this.canViewHistory = this.authService.hasAnyRole('manager', 'engineer');
     this.taskId = +this.route.snapshot.params['id'];
     this.taskService.get(this.taskId).pipe(takeUntil(this.destroy$)).subscribe((task) => {
       this.task = task;
+      const currentUserId = this.authService.getCurrentUser()?.id;
+      this.canEdit = this.isManager || (
+        this.authService.hasRole('engineer') &&
+        task.assignees.some(a => a.id == currentUserId)
+      );
       this.cdr.markForCheck();
     });
     this.loadAttachments();

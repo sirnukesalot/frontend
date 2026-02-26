@@ -17,6 +17,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { environment } from '../../../environments/environment';
 import { SummaryService, SummaryListItem } from '../../core/services/summary.service';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-reports',
@@ -32,6 +33,7 @@ import { SummaryService, SummaryListItem } from '../../core/services/summary.ser
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReportsComponent implements OnInit, OnDestroy {
+  isManager = false;
   dateFrom: Date | null = null;
   dateTo: Date | null = null;
   reportData: any = null;
@@ -47,11 +49,13 @@ export class ReportsComponent implements OnInit, OnDestroy {
     private http: HttpClient,
     private cdr: ChangeDetectorRef,
     private summaryService: SummaryService,
+    private authService: AuthService,
     private snackBar: MatSnackBar,
     private router: Router,
   ) { }
 
   ngOnInit(): void {
+    this.isManager = this.authService.hasRole('manager');
     this.loadLatestSummaries();
   }
 

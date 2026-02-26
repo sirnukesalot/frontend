@@ -11,6 +11,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { SummaryService, SummaryDetail, SummaryVersion } from '../../../core/services/summary.service';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-summary-detail',
@@ -20,8 +21,8 @@ import { SummaryService, SummaryDetail, SummaryVersion } from '../../../core/ser
     MatIconModule, MatChipsModule, MatListModule, MatDividerModule,
     MatProgressSpinnerModule, MatSnackBarModule,
   ],
-  templateUrl: './summary-list.component.html',
-  styleUrl: './summary-list.component.css',
+  templateUrl: './summary-detail.component.html',
+  styleUrl: './summary-detail.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SummaryDetailComponent implements OnInit, OnDestroy {
@@ -29,17 +30,20 @@ export class SummaryDetailComponent implements OnInit, OnDestroy {
   versions: SummaryVersion[] = [];
   loading = false;
   regenerating = false;
+  isManager = false;
   private destroy$ = new Subject<void>();
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private summaryService: SummaryService,
+    private authService: AuthService,
     private snackBar: MatSnackBar,
     private cdr: ChangeDetectorRef,
   ) { }
 
   ngOnInit(): void {
+    this.isManager = this.authService.hasRole('manager');
     this.route.params.pipe(takeUntil(this.destroy$)).subscribe((params) => {
       this.loadSummary(+params['id']);
     });

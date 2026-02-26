@@ -60,7 +60,7 @@
     </div>
 
     <!-- On-demand AI Summary Generation -->
-    <mat-card class="on-demand-card">
+    <mat-card *ngIf="isManager" class="on-demand-card">
         <mat-card-header>
             <mat-card-title>Generate AI Summary</mat-card-title>
         </mat-card-header>
@@ -104,8 +104,10 @@
                     <mat-datepicker #toPicker></mat-datepicker>
                 </mat-form-field>
                 <button mat-raised-button color="primary" (click)="loadReport()">Generate</button>
-                <button mat-button (click)="exportPDF()"><mat-icon>picture_as_pdf</mat-icon> PDF</button>
-                <button mat-button (click)="exportExcel()"><mat-icon>table_chart</mat-icon> Excel</button>
+                <button mat-button *ngIf="isManager" (click)="exportPDF()"><mat-icon>picture_as_pdf</mat-icon>
+                    PDF</button>
+                <button mat-button *ngIf="isManager" (click)="exportExcel()"><mat-icon>table_chart</mat-icon>
+                    Excel</button>
             </div>
         </mat-card-content>
     </mat-card>

@@ -47,6 +47,20 @@
         opacity: 0.6;
     }
 
+    .card-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        margin-top: 8px;
+    }
+
+    .card-tag {
+        font-size: 11px;
+        padding: 1px 6px;
+        border-radius: 10px;
+        white-space: nowrap;
+    }
+
     .assignees {
         font-size: 12px;
         margin-top: 8px;

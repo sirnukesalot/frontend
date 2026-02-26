@@ -18,6 +18,12 @@
         color: #1976d2;
     }
 
+    .tag-chip {
+        font-size: 11px;
+        min-height: 24px;
+        padding: 2px 8px;
+    }
+
     .task-list {
         background-color: #ffffff;
         padding: 10px 20px 10px 20px;
@@ -57,10 +63,10 @@
     }
 
     .switch-btn:first-child {
-    border-right: 1px solid black !important;
+        border-right: 1px solid black !important;
     }
 
-    .active{
+    .active {
         color: black !important;
         background-color: white !important;
     }
@@ -70,21 +76,21 @@
 
     }
 
-    .mat-mdc-header-cell{
+    .mat-mdc-header-cell {
         border-bottom: none !important;
     }
 
-    table{
+    table {
         width: 100%;
         border-radius: 15px;
         overflow: hidden;
         border-collapse: separate;
-    }  
+    }
 
-    .mat-mdc-header-cell:first-child{
+    .mat-mdc-header-cell:first-child {
         border-bottom-left-radius: 15px !important;
     }
 
-    .mat-mdc-header-cell:last-child{
+    .mat-mdc-header-cell:last-child {
         border-bottom-right-radius: 15px !important;
     }

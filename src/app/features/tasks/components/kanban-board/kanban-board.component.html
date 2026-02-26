@@ -20,7 +20,7 @@
         </div>
     </div>
 
-  
+
     <app-filter-panel [showStatus]="false" [showClient]="false"
         (filtersChange)="onFiltersChange($event)"></app-filter-panel>
     <app-search-bar placeholder="Search tasks..." (search)="onSearch($event)"></app-search-bar>
@@ -48,6 +48,12 @@
                 </mat-card-header>
                 <mat-card-content>
                     <mat-chip [class]="'priority-' + task.priority">{{ task.priority }}</mat-chip>
+                    <div class="card-tags" *ngIf="task.tags.length">
+                        <span *ngFor="let t of task.tags" class="card-tag" [style.background-color]="t.color"
+                            [style.color]="isLightColor(t.color) ? '#000' : '#fff'">
+                            {{ t.name }}
+                        </span>
+                    </div>
                     <div class="assignees" *ngIf="task.assignees.length">
                         <span *ngFor="let a of task.assignees; let last = last">
                             {{ a.first_name }} {{ a.last_name }}<span *ngIf="!last">, </span>

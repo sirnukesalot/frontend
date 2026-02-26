@@ -2,7 +2,7 @@
     <div class="header">
         <h2>{{ task.title }}</h2>
         <div class="actions">
-            <a mat-button [routerLink]="['/tasks', task.id, 'edit']" *ngIf="isManager">
+            <a mat-button [routerLink]="['/tasks', task.id, 'edit']" *ngIf="canEdit">
                 <mat-icon>edit</mat-icon> Edit
             </a>
         </div>
@@ -82,7 +82,7 @@
                 </ng-template>
             </div>
         </mat-tab>
-        <mat-tab label="History" *ngIf="isManager">
+        <mat-tab label="History" *ngIf="canViewHistory">
             <div class="tab-content">
                 <mat-progress-bar *ngIf="historyLoading" mode="indeterminate"></mat-progress-bar>
                 <mat-list *ngIf="history.length; else noHistory">
