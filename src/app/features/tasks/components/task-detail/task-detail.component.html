@@ -1,0 +1,108 @@
+<div *ngIf="task">
+    <div class="header">
+        <h2>{{ task.title }}</h2>
+        <div class="actions">
+            <a mat-button [routerLink]="['/tasks', task.id, 'edit']" *ngIf="isManager">
+                <mat-icon>edit</mat-icon> Edit
+            </a>
+        </div>
+    </div>
+
+    <div class="meta">
+        <mat-chip [class]="'status-' + task.status"
+            [matMenuTriggerFor]="getNextStatuses(task.status).length ? statusMenu : null"
+            [style.cursor]="getNextStatuses(task.status).length ? 'pointer' : 'default'">
+            {{ statusLabel(task.status) }}
+            <mat-icon *ngIf="getNextStatuses(task.status).length" iconPositionEnd
+                style="font-size:18px;width:18px;height:18px">arrow_drop_down</mat-icon>
+        </mat-chip>
+        <mat-menu #statusMenu="matMenu">
+            <button mat-menu-item *ngFor="let s of getNextStatuses(task.status)" (click)="onChangeStatus(s)">
+                {{ statusLabel(s) }}
+            </button>
+        </mat-menu>
+        <mat-chip [class]="'priority-' + task.priority">{{ task.priority }}</mat-chip>
+        <span>Deadline: {{ task.deadline | date:'mediumDate' }}</span>
+        <span *ngIf="task.client">Client: {{ task.client.name }}</span>
+    </div>
+
+    <mat-card class="description-card">
+        <mat-card-content>
+            <p>{{ task.description }}</p>
+        </mat-card-content>
+    </mat-card>
+
+    <div class="info-grid">
+        <div>
+            <h4>Assignees</h4>
+            <div *ngFor="let a of task.assignees">{{ a.first_name }} {{ a.last_name }}</div>
+            <div *ngIf="!task.assignees.length">No assignees</div>
+        </div>
+        <div>
+            <h4>Tags</h4>
+            <mat-chip-set>
+                <mat-chip *ngFor="let t of task.tags">{{ t.name }}</mat-chip>
+            </mat-chip-set>
+            <div *ngIf="!task.tags.length">No tags</div>
+        </div>
+        <div>
+            <h4>Created by</h4>
+            <span>{{ task.created_by?.first_name }} {{ task.created_by?.last_name }}</span>
+            <br /><small>{{ task.created_at | date:'medium' }}</small>
+        </div>
+    </div>
+
+    <mat-tab-group (selectedTabChange)="onTabChange($event)">
+        <mat-tab label="Attachments ({{ attachments.length }})">
+            <div class="tab-content">
+                <div class="upload-row">
+                    <input type="file" #fileInput (change)="onFileSelected($event)" hidden />
+                    <button mat-raised-button color="primary" (click)="fileInput.click()" [disabled]="uploading">
+                        <mat-icon>upload</mat-icon> Upload File
+                    </button>
+                </div>
+                <mat-progress-bar *ngIf="uploading" mode="indeterminate"></mat-progress-bar>
+                <mat-list *ngIf="attachments.length; else noAttachments">
+                    <mat-list-item *ngFor="let a of attachments">
+                        <mat-icon matListItemIcon>attach_file</mat-icon>
+                        <a matListItemTitle href="#" (click)="downloadAttachment(a.id, a.filename, $event)">{{
+                            a.filename }}</a>
+                        <span matListItemLine>
+                            {{ formatFileSize(a.file_size) }}
+                            &middot; {{ a.uploaded_by?.first_name }} {{ a.uploaded_by?.last_name }}
+                            &middot; {{ a.uploaded_at | date:'medium' }}
+                        </span>
+                        <button mat-icon-button *ngIf="isManager" (click)="deleteAttachment(a.id)" matListItemMeta>
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </mat-list-item>
+                </mat-list>
+                <ng-template #noAttachments>
+                    <p class="empty-message">No attachments</p>
+                </ng-template>
+            </div>
+        </mat-tab>
+        <mat-tab label="History" *ngIf="isManager">
+            <div class="tab-content">
+                <mat-progress-bar *ngIf="historyLoading" mode="indeterminate"></mat-progress-bar>
+                <mat-list *ngIf="history.length; else noHistory">
+                    <mat-list-item *ngFor="let h of history">
+                        <mat-icon matListItemIcon>{{ getHistoryIcon(h.action) }}</mat-icon>
+                        <span matListItemTitle>
+                            {{ h.action | titlecase }}{{ h.field_name ? ': ' + h.field_name : '' }}
+                        </span>
+                        <span matListItemLine>
+                            <span *ngIf="h.old_value || h.new_value">{{ h.old_value || '(empty)' }} &rarr; {{
+                                h.new_value || '(empty)' }}</span>
+                            &middot; {{ h.changed_by?.first_name }} {{ h.changed_by?.last_name }}
+                            &middot; {{ h.timestamp | date:'medium' }}
+                        </span>
+                    </mat-list-item>
+                </mat-list>
+                <ng-template #noHistory>
+                    <p *ngIf="historyLoaded" class="empty-message">No history</p>
+                </ng-template>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</div>

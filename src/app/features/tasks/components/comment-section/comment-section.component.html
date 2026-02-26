@@ -1,0 +1,33 @@
+<div class="comment-section">
+    <h3>Comments</h3>
+
+    <div *ngIf="canComment" class="comment-form">
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Add a comment (use &#64;Name to mention)</mat-label>
+            <textarea matInput [(ngModel)]="newComment" rows="3"></textarea>
+        </mat-form-field>
+        <div class="comment-actions">
+            <mat-slide-toggle *ngIf="isManager" [(ngModel)]="isPublic">Public</mat-slide-toggle>
+            <button mat-raised-button color="primary" (click)="submitComment()" [disabled]="!newComment.trim()">
+                <mat-icon>send</mat-icon> Post
+            </button>
+        </div>
+    </div>
+
+    <mat-list>
+        <mat-list-item *ngFor="let comment of comments" class="comment-item">
+            <div class="comment-header">
+                <strong>{{ comment.author.first_name }} {{ comment.author.last_name }}</strong>
+                <span class="role-badge">{{ comment.author.role }}</span>
+                <span *ngIf="!comment.is_public" class="private-badge">Private</span>
+                <span class="date">{{ comment.created_at | date:'medium' }}</span>
+            </div>
+            <p class="comment-content">{{ comment.content }}</p>
+            <div *ngIf="comment.mentions.length" class="mentions">
+                Mentions: <span *ngFor="let m of comment.mentions; let last = last">
+                    {{ m.first_name }} {{ m.last_name }}<span *ngIf="!last">, </span>
+                </span>
+            </div>
+        </mat-list-item>
+    </mat-list>
+</div>

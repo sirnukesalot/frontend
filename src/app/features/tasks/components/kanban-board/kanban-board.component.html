@@ -1,0 +1,63 @@
+<div class="kanban-board">
+    <div class="kanban-board-header">
+        <h2>Kanban Board</h2>
+        <div class="header-actions">
+            <div class="switch-buttons">
+                <a mat-raised-button color="primary" class="switch-btn" routerLink="/tasks" *ngIf="isManager"
+                    routerLinkActive="active">
+                    List
+                </a>
+                <a mat-raised-button color="primary" class="switch-btn" routerLink="/kanban" *ngIf="isManager"
+                    routerLinkActive="active">
+                    Kanban
+                </a>
+            </div>
+
+
+            <a mat-raised-button color="primary" class="btn" routerLink="new" *ngIf="isManager">
+                <mat-icon>add</mat-icon> New Task
+            </a>
+        </div>
+    </div>
+
+  
+    <app-filter-panel [showStatus]="false" [showClient]="false"
+        (filtersChange)="onFiltersChange($event)"></app-filter-panel>
+    <app-search-bar placeholder="Search tasks..." (search)="onSearch($event)"></app-search-bar>
+    <div class="kanban-container">
+        <div class="kanban-column" *ngFor="let col of columns" cdkDropList [cdkDropListData]="col.tasks"
+            [id]="col.status" [cdkDropListConnectedTo]="columnIds" (cdkDropListDropped)="onDrop($event, col)">
+            <h3 class="column-header">{{ col.label }} ({{ col.tasks.length }})</h3>
+            <mat-card *ngFor="let task of col.tasks" cdkDrag class="kanban-card" [class]="'priority-' + task.priority">
+                <mat-card-header>
+                    <mat-card-title>
+                        <a [routerLink]="['/tasks', task.id]">{{ task.title }}</a>
+                    </mat-card-title>
+                    <button mat-icon-button [matMenuTriggerFor]="cardStatusMenu"
+                        *ngIf="getNextStatuses(task.status).length" (click)="$event.stopPropagation()"
+                        class="card-menu-btn" cdkDragHandle>
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #cardStatusMenu="matMenu">
+                        <div class="menu-header" mat-menu-item disabled>Move to</div>
+                        <button mat-menu-item *ngFor="let s of getNextStatuses(task.status)"
+                            (click)="onMenuChangeStatus(task, col, s)">
+                            {{ statusLabel(s) }}
+                        </button>
+                    </mat-menu>
+                </mat-card-header>
+                <mat-card-content>
+                    <mat-chip [class]="'priority-' + task.priority">{{ task.priority }}</mat-chip>
+                    <div class="assignees" *ngIf="task.assignees.length">
+                        <span *ngFor="let a of task.assignees; let last = last">
+                            {{ a.first_name }} {{ a.last_name }}<span *ngIf="!last">, </span>
+                        </span>
+                    </div>
+                    <div class="deadline" *ngIf="task.deadline">
+                        {{ task.deadline | date:'shortDate' }}
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>

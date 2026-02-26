@@ -1,0 +1,102 @@
+  .filter-card {
+      margin-bottom: 24px;
+  }
+
+  .filter-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+  }
+
+  .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+  }
+
+  .stat {
+      font-size: 32px;
+      font-weight: bold;
+      text-align: center;
+  }
+
+  .report-content {
+      margin-top: 24px;
+  }
+
+  .ai-summary-section {
+      margin-bottom: 32px;
+  }
+
+  .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+  }
+
+  .section-header h3 {
+      margin: 0;
+  }
+
+  .summary-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 16px;
+      margin-bottom: 12px;
+  }
+
+  .clickable-card {
+      cursor: pointer;
+      transition: box-shadow 0.2s;
+  }
+
+  .clickable-card:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .summary-preview {
+      white-space: pre-line;
+      line-height: 1.6;
+  }
+
+  .no-summaries {
+      color: #666;
+      font-style: italic;
+  }
+
+  .generated-at {
+      color: #666;
+  }
+
+  .method-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 500;
+      margin-left: 8px;
+      text-transform: uppercase;
+  }
+
+  .method-badge.ai {
+      background: #e8f5e9;
+      color: #2e7d32;
+  }
+
+  .method-badge.fallback {
+      background: #fff3e0;
+      color: #e65100;
+  }
+
+  .on-demand-card {
+      margin-bottom: 24px;
+  }
+  
+  .reports-list {
+        background-color: #ffffff;
+        padding: 10px 20px 10px 20px;
+        margin-left: 25px;
+        border-radius: 15px;
+    }

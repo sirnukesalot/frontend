@@ -1,0 +1,30 @@
+   .header {
+       display: flex;
+       justify-content: space-between;
+       align-items: center;
+       margin-bottom: 16px;
+   }
+
+   .full-width {
+       width: 100%;
+   }
+
+   a {
+       text-decoration: none;
+       color: #1976d2;
+   }
+
+   .clients-list{
+        background-color: #ffffff;
+        padding: 10px 20px 10px 20px;
+        margin-left: 25px;
+        border-radius: 15px;
+    }
+
+    [mat-raised-button]{
+        --mdc-protected-button-container-color: #1677ff;
+        --mdc-protected-button-label-text-color: white;
+        border-radius: 10px;
+        font-weight: bold;
+        box-shadow: none;
+    }

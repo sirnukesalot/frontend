@@ -1,0 +1,76 @@
+     .app-container {
+       height: 100vh;
+     }
+
+     .app-sidenav {
+       width: 240px;
+       padding-right: 15px;
+       padding-left: 15px;
+       border-right: 0px;
+     }
+
+     .sidenav-header {
+       border-bottom: 1.8px solid #e2e2e2;
+       border-radius: 1px;
+       margin-bottom: 5px;
+     }
+
+     .spacer {
+       flex: 1 1 auto;
+     }
+
+     .content {
+       padding: 24px;
+     }
+
+     .active {
+       background-color: #f3f3f3;
+     }
+
+
+
+     h3 {
+       padding-left: 15px;
+       padding-right: 15px;
+     }
+
+     .toolbar {
+       margin-top: 10px;
+       background-color: #fafafa;
+     }
+
+     .item mat-icon {
+       color: transparent;
+       -webkit-text-stroke: 1.15px black;
+     }
+
+     .toolbar-name {
+       margin-left: 20px;
+       font-size: 30px
+     }
+
+     .toolbar mat-icon {
+       border: 1px solid #ffffff;
+       background-color: #ffffff;
+       border-radius: 5px;
+       padding: 4px;
+       overflow: visible;
+       box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.1);
+       color: #ffffff;
+       -webkit-text-stroke: 1.8px black;
+       paint-order: fill stroke;
+     }
+
+     .toolbar mat-icon-button{
+      -webkit-text-stroke: 1px black ;
+     }
+
+     ::ng-deep .mat-badge-content{
+      -webkit-text-stroke: 0px transparent !important;
+     }
+
+    :host ::ng-deep .mdc-list-item {
+        border-color: #fafafa !important;
+        border-radius: 12px !important;
+        margin-bottom: 5px;
+    }

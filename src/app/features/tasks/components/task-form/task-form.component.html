@@ -1,0 +1,72 @@
+<mat-card class="card-list">
+    <mat-card-header>
+        <mat-card-title>{{ isEdit ? 'Edit Task' : 'Create Task' }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Title</mat-label>
+                <input matInput formControlName="title" />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Description</mat-label>
+                <textarea matInput formControlName="description" rows="5"></textarea>
+            </mat-form-field>
+
+            <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Priority</mat-label>
+                    <mat-select formControlName="priority">
+                        <mat-option value="low">Low</mat-option>
+                        <mat-option value="medium">Medium</mat-option>
+                        <mat-option value="high">High</mat-option>
+                        <mat-option value="critical">Critical</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Deadline</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="deadline" />
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Assignees</mat-label>
+                <mat-select formControlName="assignee_ids" multiple (openedChange)="onAssigneeDropdownToggle($event)">
+                    <div class="select-search">
+                        <input class="select-search-input" placeholder="Search engineers..."
+                            (keydown)="$event.stopPropagation()" (input)="filterEngineers($any($event.target).value)" />
+                    </div>
+                    <mat-option *ngFor="let u of filteredEngineers" [value]="u.id">
+                        {{ u.first_name }} {{ u.last_name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Client</mat-label>
+                <mat-select formControlName="client_id">
+                    <mat-option [value]="null">None</mat-option>
+                    <mat-option *ngFor="let c of clients" [value]="c.id">{{ c.name }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Tags</mat-label>
+                <mat-select formControlName="tag_ids" multiple>
+                    <mat-option *ngFor="let t of tags" [value]="t.id">{{ t.name }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <div class="actions">
+                <button mat-button type="button" (click)="cancel()">Cancel</button>
+                <button mat-raised-button color="primary" type="submit" [disabled]="taskForm.invalid || saving">
+                    {{ isEdit ? 'Update' : 'Create' }}
+                </button>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

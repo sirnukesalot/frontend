@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>Create Organization</h2>
+<mat-dialog-content>
+    <form [formGroup]="form">
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Organization Name</mat-label>
+            <input matInput formControlName="name" />
+            <mat-error *ngIf="form.get('name')?.hasError('required')">Name is required</mat-error>
+        </mat-form-field>
+        <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="loading">Create</button>
+</mat-dialog-actions>

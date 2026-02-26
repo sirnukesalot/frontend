@@ -1,0 +1,11 @@
+    .meta {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        margin: 12px 0;
+    }
+
+    .date {
+        color: #757575;
+        font-size: 12px;
+    }

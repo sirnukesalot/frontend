@@ -1,0 +1,25 @@
+.search-field {
+    width: 70%;
+}
+
+:host ::ng-deep .mdc-text-field--outlined .mdc-notched-outline__leading {
+    border-color: #e1e1e2 !important;
+    border-width: 1.5px !important;
+    border-top-left-radius: 10px !important;
+    border-bottom-left-radius: 10px !important;
+}
+
+
+
+:host ::ng-deep .mdc-text-field--outlined .mdc-notched-outline__notch {
+    border-color: #e1e1e2 !important;
+    border-top-width: 1.5px !important;
+    border-bottom-width: 1.5px !important;
+}
+
+:host ::ng-deep .mdc-text-field--outlined .mdc-notched-outline__trailing {
+    border-color: #e1e1e2 !important;
+    border-width: 1.5px !important;
+    border-top-right-radius: 10px !important;
+    border-bottom-right-radius: 10px !important;
+}

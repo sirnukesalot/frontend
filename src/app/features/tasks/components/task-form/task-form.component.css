@@ -1,0 +1,72 @@
+    .full-width {
+        width: 100%;
+    }
+
+    .row {
+        display: flex;
+        gap: 16px;
+    }
+
+    .row mat-form-field {
+        flex: 1;
+    }
+
+    .actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 8px;
+        margin-top: 16px;
+    }
+
+    ::ng-deep .select-search {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        padding: 8px;
+        background: white;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    ::ng-deep .select-search-input {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+        outline: none;
+        box-sizing: border-box;
+    }
+
+    ::ng-deep .select-search-input:focus {
+        border-color: #3f51b5;
+    }
+
+    .card-list {
+        background-color: #ffffff;
+        padding: 10px 20px 10px 20px;
+        margin-left: 25px;
+        border-radius: 15px;
+        box-shadow: none    ;
+    }
+
+     :host ::ng-deep .mdc-text-field--outlined .mdc-notched-outline__leading {
+        border-color: #e1e1e2 !important;
+        border-width: 1.5px !important;
+        border-top-left-radius: 10px !important;
+        border-bottom-left-radius: 10px !important;
+    }
+
+
+
+    :host ::ng-deep .mdc-text-field--outlined .mdc-notched-outline__notch {
+        border-color: #e1e1e2 !important;
+        border-top-width: 1.5px !important;
+        border-bottom-width: 1.5px !important;
+    }
+
+    :host ::ng-deep .mdc-text-field--outlined .mdc-notched-outline__trailing {
+        border-color: #e1e1e2 !important;
+        border-width: 1.5px !important;
+        border-top-right-radius: 10px !important;
+        border-bottom-right-radius: 10px !important;
+    }
