@@ -8,7 +8,15 @@
     .kanban-column {
         flex: 1;
         min-width: 250px;
-        background: #f5f5f5;
+        background: #d9d9d9;
+        border-radius: 8px;
+        padding: 12px 12px 1px 12px;
+    }
+
+    .kanban-column-done{
+        flex: 1;
+        min-width: 250px;
+        background: #d8dde0;
         border-radius: 8px;
         padding: 12px;
     }
@@ -19,8 +27,9 @@
     }
 
     .kanban-card {
-        margin-bottom: 8px;
+        margin-bottom: 15px;
         cursor: grab;
+        box-shadow: none;
     }
 
     .kanban-card a {
@@ -57,8 +66,10 @@
     .card-tag {
         font-size: 11px;
         padding: 1px 6px;
-        border-radius: 10px;
+        border: 1px solid;
+        border-radius: 5px;
         white-space: nowrap;
+         --mdc-chip-label-text-color: inherit;
     }
 
     .assignees {
@@ -134,4 +145,35 @@
     .active {
         color: black !important;
         background-color: white !important;
+    }
+
+    .header-created {
+        background-color: #eeeded;
+        color: #7d7c7c;
+        padding: 15px 0px 15px 0px;
+        border-radius: 10px;
+    }
+
+    
+    .header-in_progress {
+        background-color: #fff7e6;
+        color: #bb7f43;
+        padding: 15px 0px 15px 0px;
+        border-radius: 10px;
+    }
+
+ 
+    .header-waiting {
+        background-color: #f1f0f7;
+        color: #7073cd;
+        padding: 15px 0px 15px 0px;
+        border-radius: 10px;
+    }
+
+
+    .header-done {
+        background-color: #e8f3eb;
+        color: #67ad5d;
+        padding: 15px 0px 15px 0px;
+        border-radius: 10px;
     }

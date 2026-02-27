@@ -1,0 +1,32 @@
+ .archive-header {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     margin-bottom: 16px;
+ }
+
+ .full-width {
+     width: 100%;
+ }
+
+ table {
+     margin-bottom: 16px;
+ }
+
+ a {
+     text-decoration: none;
+     color: #1976d2;
+ }
+
+ .tag-chip {
+     font-size: 11px;
+     min-height: 24px;
+     padding: 2px 8px;
+ }
+
+ .archive-list {
+        background-color: #ffffff;
+        padding: 10px 20px 10px 20px;
+        margin-left: 25px;
+        border-radius: 15px;
+    }

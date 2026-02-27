@@ -31,10 +31,56 @@
         border-radius: 15px;
     }
 
-     [mat-raised-button]{
+    [mat-raised-button] {
         --mdc-protected-button-container-color: #1677ff;
         --mdc-protected-button-label-text-color: white;
         border-radius: 10px;
         font-weight: bold;
         box-shadow: none;
+    }
+
+    .mat-mdc-header-row {
+        background-color: #f5f5f5 !important;
+
+    }
+
+    .mat-mdc-header-cell:first-child {
+        border-bottom-left-radius: 15px !important;
+        border-top-left-radius: 15px !important;
+    }
+
+    .mat-mdc-header-cell:last-child {
+        border-bottom-right-radius: 15px !important;
+        border-top-right-radius: 15px !important;
+    }
+
+    .mat-mdc-header-cell {
+        border-bottom: none !important;
+    }
+
+    .mat-mdc-cell {
+        border-bottom: none !important;
+    }
+
+
+    :host ::ng-deep .mdc-text-field--outlined .mdc-notched-outline__leading {
+        border-color: #e1e1e2 !important;
+        border-width: 1.5px !important;
+        border-top-left-radius: 10px !important;
+        border-bottom-left-radius: 10px !important;
+    }
+
+
+
+    :host ::ng-deep .mdc-text-field--outlined .mdc-notched-outline__notch {
+        border-color: #e1e1e2 !important;
+        border-top-width: 1.5px !important;
+        border-bottom-width: 1.5px !important;
+    }
+
+    :host ::ng-deep .mdc-text-field--outlined .mdc-notched-outline__trailing {
+        border-color: #e1e1e2 !important;
+        border-width: 1.5px !important;
+        border-top-right-radius: 10px !important;
+        border-bottom-right-radius: 10px !important;
     }

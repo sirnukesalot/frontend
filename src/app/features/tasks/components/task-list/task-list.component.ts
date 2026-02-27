@@ -14,6 +14,8 @@ import { AuthService } from '../../../../core/services/auth.service';
 import { STATUS_LABELS, VALID_TRANSITIONS } from '../../../../core/constants/task-status';
 import { SearchBarComponent } from '../../../../shared/components/search-bar/search-bar.component';
 import { FilterPanelComponent, FilterState } from '../filter-panel/filter-panel.component';
+import { SelectionModel } from '@angular/cdk/collections';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-task-list',
@@ -21,7 +23,7 @@ import { FilterPanelComponent, FilterState } from '../filter-panel/filter-panel.
   imports: [
     CommonModule, RouterModule, MatTableModule, MatButtonModule,
     MatIconModule, MatChipsModule, MatPaginatorModule, MatMenuModule, MatSnackBarModule,
-    SearchBarComponent, FilterPanelComponent,
+    SearchBarComponent, FilterPanelComponent, MatCheckboxModule
   ],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.css',
@@ -34,10 +36,11 @@ export class TaskListComponent implements OnInit, OnDestroy {
   pageSize = 20;
   isManager = false;
   canCreate = false;
-  displayedColumns = ['space', 'title', 'status', 'priority', 'assignees', 'client', 'tags', 'deadline'];
+  displayedColumns = ['select', 'title', 'status', 'priority', 'assignees', 'client', 'tags', 'deadline'];
   private searchTerm = '';
   private activeFilters: FilterState = {};
   private destroy$ = new Subject<void>();
+  selection = new SelectionModel<TaskListItem>(true, [])
 
   constructor(
     private taskService: TaskService,
@@ -105,6 +108,22 @@ export class TaskListComponent implements OnInit, OnDestroy {
     this.loadTasks();
   }
 
+  isOverdue(task: TaskListItem): boolean {
+    if (task.status === 'done' || task.status === 'archived' || !task.deadline) {
+      return false;
+    }
+    return new Date(task.deadline) < new Date();
+  }
+
+  getOverdueDays(task: TaskListItem): string {
+    const deadline = new Date(task.deadline);
+    const now = new Date();
+    const diffMs = deadline.getTime() - now.getTime();
+    const diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+    return `${diffDays}d`;
+  }
+
+
   isLightColor(hex: string): boolean {
     const c = hex.replace('#', '');
     const r = parseInt(c.substring(0, 2), 16);
@@ -123,5 +142,9 @@ export class TaskListComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  selectHandler(row: TaskListItem) {
+    this.selection.toggle(row)
   }
 }

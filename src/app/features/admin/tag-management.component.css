@@ -47,3 +47,18 @@
         padding: 32px;
         color: #888;
     }
+
+    .tag-list {
+        background-color: #ffffff;
+        padding: 10px 20px 10px 20px;
+        margin-left: 25px;
+        border-radius: 15px;
+    }
+
+    [mat-raised-button].btn {
+        --mdc-protected-button-container-color: #1677ff;
+        --mdc-protected-button-label-text-color: white;
+        border-radius: 10px;
+        font-weight: bold;
+        box-shadow: none;
+    }

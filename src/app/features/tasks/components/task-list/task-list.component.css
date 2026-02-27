@@ -19,9 +19,14 @@
     }
 
     .tag-chip {
-        font-size: 11px;
-        min-height: 24px;
-        padding: 2px 8px;
+        border: 1px solid !important;
+        --mdc-chip-label-text-color: inherit;
+        border-radius: 5px;
+    }
+
+    .deadline-overdue {
+        color: #d32f2f;
+        font-weight: 500;
     }
 
     .task-list {
@@ -93,4 +98,38 @@
 
     .mat-mdc-header-cell:last-child {
         border-bottom-right-radius: 15px !important;
+    }
+
+
+    :host ::ng-deep .mat-mdc-checkbox.mat-mdc-checkbox-checked .mdc-checkbox__background,
+    .mdc-checkbox__ripple .mat-ripple-element {
+        background-color: #757575 !important;
+        border-color: #757575 !important;
+    }
+
+
+    :host ::ng-deep .mat-mdc-checkbox {
+        --mdc-checkbox-selected-focus-icon-color: #757575 !important;
+        --mdc-checkbox-selected-hover-icon-color: #757575 !important;
+        --mdc-checkbox-selected-icon-color: #757575 !important;
+        --mdc-checkbox-selected-pressed-icon-color: #757575 !important;
+
+        --mdc-checkbox-selected-focus-state-layer-color: #757575 !important;
+        --mdc-checkbox-selected-hover-state-layer-color: #757575 !important;
+        --mdc-checkbox-selected-pressed-state-layer-color: #757575 !important;
+
+    }
+
+    :host ::ng-deep .tag-chip .mdc-evolution-chip__text-label {
+        font-size: 15px !important;
+    }
+
+    .status-chip-base mat-icon {
+        color: inherit !important;
+    }
+
+    :host ::ng-deep .mdc-checkbox__background {
+        border-width: 1.5px !important;
+        border-radius: 3.5px;
+        border-color: #dddddd !important;
     }

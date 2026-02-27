@@ -3,12 +3,13 @@
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      background-color: #f5f5f5;
+      background-color: #fafafa;
     }
 
     .login-card {
       width: 400px;
       padding: 24px;
+      box-shadow: none;
     }
 
     .full-width {
@@ -23,4 +24,43 @@
       color: #f44336;
       margin-bottom: 16px;
       text-align: center;
+    }
+
+    mat-card-header {
+      margin: 60px 30px;
+      justify-content: center;
+    }
+
+    [mat-raised-button].btn {
+      --mdc-protected-button-container-color: #1677ff;
+      --mdc-protected-button-label-text-color: white;
+      border-radius: 10px;
+      font-weight: bold;
+      width: 100%;
+      box-shadow: none;
+    }
+
+    :host ::ng-deep .mdc-text-field--outlined .mdc-notched-outline__leading {
+      border-color: transparent !important;
+      border-top-left-radius: 10px !important;
+      border-bottom-left-radius: 10px !important;
+    }
+
+
+
+    :host ::ng-deep .mdc-text-field--outlined .mdc-notched-outline__notch {
+      border-color: transparent !important;
+      border-top-width: 1.5px !important;
+      border-bottom-width: 1.5px !important;
+    }
+
+    :host ::ng-deep .mdc-text-field--outlined .mdc-notched-outline__trailing {
+      border-color: transparent !important;
+      border-top-right-radius: 10px !important;
+      border-bottom-right-radius: 10px !important;
+    }
+
+    :host ::ng-deep .mat-mdc-text-field-wrapper {
+      background-color: #f5f5f5 !important;
+      border-radius: 10px;
     }

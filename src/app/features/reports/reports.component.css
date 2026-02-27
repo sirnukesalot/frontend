@@ -1,12 +1,14 @@
   .filter-card {
       margin-bottom: 24px;
+      background-color: #ffffff;
   }
 
   .filter-row {
       display: flex;
-      gap: 12px;
+      gap: 20px;
       align-items: center;
       flex-wrap: wrap;
+      margin-left: -16px;
   }
 
   .summary-grid {
@@ -91,12 +93,57 @@
   }
 
   .on-demand-card {
-      margin-bottom: 24px;
+      background-color: #ffffff;
   }
-  
+
   .reports-list {
-        background-color: #ffffff;
-        padding: 10px 20px 10px 20px;
-        margin-left: 25px;
-        border-radius: 15px;
-    }
+      background-color: #ffffff;
+      padding: 10px 20px 10px 20px;
+      margin-left: 25px;
+      border-radius: 15px;
+      margin-bottom: 20px;
+  }
+
+  mat-card {
+      box-shadow: none;
+      background-color: #f3f3f3;
+      border-radius: 15px;
+  }
+
+  :host ::ng-deep .mdc-text-field--outlined .mdc-notched-outline__leading {
+      border-color: #e1e1e2 !important;
+      border-width: 1.5px !important;
+      border-top-left-radius: 10px !important;
+      border-bottom-left-radius: 10px !important;
+  }
+
+
+
+  :host ::ng-deep .mdc-text-field--outlined .mdc-notched-outline__notch {
+      border-color: #e1e1e2 !important;
+      border-top-width: 1.5px !important;
+      border-bottom-width: 1.5px !important;
+  }
+
+  :host ::ng-deep .mdc-text-field--outlined .mdc-notched-outline__trailing {
+      border-color: #e1e1e2 !important;
+      border-width: 1.5px !important;
+      border-top-right-radius: 10px !important;
+      border-bottom-right-radius: 10px !important;
+  }
+
+
+  [mat-raised-button].btn {
+      --mdc-protected-button-container-color: #1677ff;
+      --mdc-protected-button-label-text-color: white;
+      border-radius: 10px;
+      font-weight: bold;
+      width: 25%;
+      box-shadow: none;
+      margin-top: -1.5px;
+  }
+
+  [mat-button].export {
+    border: 1.5px solid #e1e1e2;
+    border-radius: 5px;
+  }

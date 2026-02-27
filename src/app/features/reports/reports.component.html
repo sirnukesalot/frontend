@@ -1,5 +1,31 @@
 <div class="reports-list">
-    <h2>Reports</h2>
+    <h2>AI Reports</h2>
+
+    <!-- On-demand AI Summary Generation -->
+    <mat-card *ngIf="isManager" class="on-demand-card">
+        <mat-card-content>
+            <div class="filter-row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Start Date</mat-label>
+                    <input matInput [matDatepicker]="aiFromPicker" [(ngModel)]="aiDateFrom" />
+                    <mat-datepicker-toggle matIconSuffix [for]="aiFromPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #aiFromPicker></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>End Date</mat-label>
+                    <input matInput [matDatepicker]="aiToPicker" [(ngModel)]="aiDateTo" />
+                    <mat-datepicker-toggle matIconSuffix [for]="aiToPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #aiToPicker></mat-datepicker>
+                </mat-form-field>
+                <button mat-raised-button color="accent" class="btn" (click)="generateAISummary()"
+                    [disabled]="!aiDateFrom || !aiDateTo || generating">
+                    <mat-icon>auto_awesome</mat-icon>
+                    {{ generating ? 'Generating...' : 'Generate AI Summary' }}
+                </button>
+            </div>
+        </mat-card-content>
+    </mat-card>
+
 
     <!-- AI Summary Section -->
     <div class="ai-summary-section">
@@ -58,35 +84,11 @@
             No scheduled summaries yet. Generate one on demand below, or wait for the next automatic daily/weekly run.
         </p>
     </div>
+</div>
 
-    <!-- On-demand AI Summary Generation -->
-    <mat-card *ngIf="isManager" class="on-demand-card">
-        <mat-card-header>
-            <mat-card-title>Generate AI Summary</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <div class="filter-row">
-                <mat-form-field appearance="outline">
-                    <mat-label>Start Date</mat-label>
-                    <input matInput [matDatepicker]="aiFromPicker" [(ngModel)]="aiDateFrom" />
-                    <mat-datepicker-toggle matIconSuffix [for]="aiFromPicker"></mat-datepicker-toggle>
-                    <mat-datepicker #aiFromPicker></mat-datepicker>
-                </mat-form-field>
-                <mat-form-field appearance="outline">
-                    <mat-label>End Date</mat-label>
-                    <input matInput [matDatepicker]="aiToPicker" [(ngModel)]="aiDateTo" />
-                    <mat-datepicker-toggle matIconSuffix [for]="aiToPicker"></mat-datepicker-toggle>
-                    <mat-datepicker #aiToPicker></mat-datepicker>
-                </mat-form-field>
-                <button mat-raised-button color="accent" (click)="generateAISummary()"
-                    [disabled]="!aiDateFrom || !aiDateTo || generating">
-                    <mat-icon>auto_awesome</mat-icon>
-                    {{ generating ? 'Generating...' : 'Generate AI Summary' }}
-                </button>
-            </div>
-        </mat-card-content>
-    </mat-card>
 
+<div class="reports-list">
+    <h3>Export Summaries</h3>
     <!-- Existing Reports Section -->
     <mat-card class="filter-card">
         <mat-card-content>
@@ -103,15 +105,17 @@
                     <mat-datepicker-toggle matIconSuffix [for]="toPicker"></mat-datepicker-toggle>
                     <mat-datepicker #toPicker></mat-datepicker>
                 </mat-form-field>
-                <button mat-raised-button color="primary" (click)="loadReport()">Generate</button>
-                <button mat-button *ngIf="isManager" (click)="exportPDF()"><mat-icon>picture_as_pdf</mat-icon>
+                <button mat-raised-button color="primary" (click)="loadReport()" class="btn"><mat-icon>auto_awesome</mat-icon>  Generate AI Summary</button>
+                <button mat-button *ngIf="isManager" (click)="exportPDF()" class="export"><mat-icon>picture_as_pdf</mat-icon>
                     PDF</button>
-                <button mat-button *ngIf="isManager" (click)="exportExcel()"><mat-icon>table_chart</mat-icon>
+                <button mat-button *ngIf="isManager" (click)="exportExcel()" class="export"><mat-icon>table_chart</mat-icon>
                     Excel</button>
             </div>
         </mat-card-content>
     </mat-card>
+</div>
 
+<div class="reports-list">
     <div *ngIf="reportData" class="report-content">
         <div class="summary-grid">
             <mat-card><mat-card-content>
