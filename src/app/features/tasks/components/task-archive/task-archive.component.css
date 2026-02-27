@@ -25,8 +25,16 @@
  }
 
  .archive-list {
-        background-color: #ffffff;
-        padding: 10px 20px 10px 20px;
-        margin-left: 25px;
-        border-radius: 15px;
-    }
+     background-color: #ffffff;
+     padding: 10px 20px 10px 20px;
+     margin-left: 25px;
+     border-radius: 15px;
+ }
+
+ .title {
+     font-size: 30px;
+     font-weight: bold;
+     margin-top: -50px;
+     margin-bottom: 50px;
+     margin-left: 10px;
+ }

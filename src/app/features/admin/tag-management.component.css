@@ -62,3 +62,26 @@
         font-weight: bold;
         box-shadow: none;
     }
+
+    .mat-mdc-header-row {
+        background-color: #f5f5f5 !important;
+
+    }
+
+    .mat-mdc-header-cell:first-child {
+        border-bottom-left-radius: 15px !important;
+        border-top-left-radius: 15px !important;
+    }
+
+    .mat-mdc-header-cell:last-child {
+        border-bottom-right-radius: 15px !important;
+        border-top-right-radius: 15px !important;
+    }
+
+    .mat-mdc-header-cell {
+        border-bottom: none !important;
+    }
+
+    .mat-mdc-cell {
+        border-bottom: none !important;
+    }

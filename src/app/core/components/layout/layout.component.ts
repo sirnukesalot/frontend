@@ -82,7 +82,13 @@ export class LayoutComponent implements OnInit, OnDestroy {
       this.unreadCount = count;
       this.cdr.markForCheck();
     });
+
   }
+
+  // private updateTitle(): void {
+  //   this.currentPageTitle = match ? match.label : 'Dashboard';
+  // }
+
 
   ngOnDestroy(): void {
     this.destroy$.next();

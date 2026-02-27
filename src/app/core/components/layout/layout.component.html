@@ -14,7 +14,7 @@
 
   <mat-sidenav-content>
     <mat-toolbar class="toolbar">
-      <div class="toolbar-name">Orders</div>
+      <!-- <div class="toolbar-name">{{currentPageTitle}}</div> -->
       <span class="spacer"></span>
       <button mat-icon-button [matMenuTriggerFor]="notifMenu" (click)="loadNotifications()">
         <mat-icon [matBadge]="unreadCount > 0 ? unreadCount : null" matBadgeColor="warn">
